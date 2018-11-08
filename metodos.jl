@@ -10,15 +10,50 @@ function euler(f, t₀, y₀, tₙ; n = 100)
 end
 
 function euler_aperfeicoado(f, t₀, y₀, tₙ; n = 100)
-  # Implemente
+  h = (tₙ - tₒ) / n
+  t = linspace(tₒ, tₙ, n + 1)
+  y = zeros(n + 1)
+  α = β = 0.5
+  δ = γ = 1
+  y[1] = yₒ
+  for k = 1:n
+    k₁ = f(t[k], y[k])
+    k₂ = f(t[k] + δ * h, y[k] + γ * h * k₁)
+    y[k + 1] = y[k] + h * (α * k₁ + β * k₂)
+  end
+  return t, y
 end
 
 function heun(f, t₀, y₀, tₙ; n = 100)
-  # Implemente
+  h = (tₙ - tₒ) / n
+  t = linspace(tₒ, tₙ, n + 1)
+  y = zeros(n + 1)
+  α = 0.25
+  β = 0.75
+  δ = γ = (2/3)
+  y[1] = yₒ
+  for k = 1:n
+    k₁ = f(t[k], y[k])
+    k₂ = f(t[k] + δ * h, y[k] + γ * h * k₁)
+    y[k + 1] = y[k] + h * (α * k₁ + β * k₂)
+  end
+  return t, y
 end
 
 function midpoint(f, t₀, y₀, tₙ; n = 100)
-  # Implemente
+  h = (tₙ - tₒ) / n
+  t = linspace(tₒ, tₙ, n + 1)
+  y = zeros(n + 1)
+  α = 0
+  β = 1
+  δ = γ = 0.5
+  y[1] = yₒ
+  for k = 1:n
+    k₁ = f(t[k], y[k])
+    k₂ = f(t[k] + δ * h, y[k] + γ * h * k₁)
+    y[k + 1] = y[k] + h * (α * k₁ + β * k₂)
+  end
+  return t, y  
 end
 
 function rungekutta4(f, t₀, y₀, tₙ; n = 100)
