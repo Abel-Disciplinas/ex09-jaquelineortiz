@@ -70,5 +70,3 @@ function rungekutta4(f, t₀, y₀, tₙ; n = 100)
   end
   return t, y
 end
-
-end
